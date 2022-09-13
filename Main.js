@@ -1,8 +1,5 @@
-console.log(document.domain)
- console.log(document.url)
- console.log(document.title)
- console.log(document.doctype)
-
-
-var headerTitle = document.getElementById('header-title');
-onsole.log(headerTitle);
+var items=document.getElementsByClassName('list-group-item');
+console.log(items);
+console.log(items[3]);
+items[2].style.fontWeight ='bold';
+items[2].style.backgroundColor ='green';
