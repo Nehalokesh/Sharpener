@@ -1,28 +1,24 @@
-const myform = document.querySelector('#my-form');
-const nameInput = document.querySelector('#name');
-const emailInput = document.querySelector('#email');
-const msg = document.querySelector('.msg');
-const userList = document.querySelector('#users');
+//let multiply=function(x,y){
+  //  console.log(x*y);
+//}
 
-myform.addEventListener('submit',onSubmit);
+//let multiplyByTwo=multiply.bind(this,2);
+//multiplyByTwo(3);
 
-function onSubmit(e) {
-  e.preventDefault();
+//let multiplyByThree=multiply.bind(this,3);
+//multiplyByThree(5);
 
-  if(nameInput.value === '' || emailInput.value === ''){
-    msg.classList.add('error');
-    msg.innerHTML = 'Please enter all fields';
 
-    setTimeout(()=> msg.remove(), 3000);
-  
-  } else {
-    const li=document.createElement('li');
-    li.appendChild(document.createTextNode(`${nameInput.value}: ${emailInput.value}`));
 
-    userList.appendChild(li);
-    // clear fields
-    nameInput.value ='';
-    emailInput.value='';
-  }
+
+let multiply=function(x){
+    return function(y){
+        console.log(x*y);
+    }
 }
 
+let multiplyByTwo=multiply(2);
+multiplyByTwo(3);
+
+let multiplyByThree=multiply(3);
+multiplyByThree(10);
