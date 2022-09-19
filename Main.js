@@ -1,24 +1,24 @@
-//let multiply=function(x,y){
-  //  console.log(x*y);
-//}
+class Student {
+  constructor(name,age,marks){
+    this.name=name;
+    this.age=age;
+    this.marks=marks;
+  }
+  setPlacementAge(minPlacementAge){
+    console.log(this);
+    return (minMarks) => {
 
-//let multiplyByTwo=multiply.bind(this,2);
-//multiplyByTwo(3);
-
-//let multiplyByThree=multiply.bind(this,3);
-//multiplyByThree(5);
-
-
-
-
-let multiply=function(x){
-    return function(y){
-        console.log(x*y);
+      console.log("Inside eligibleForCurrentCompany", this)
+      if(this.marks > minMarks && this.age > minPlacementAge){
+      } else {
+        console.log(this.name + " is not ready for placements")
+      }
     }
+  }
 }
 
-let multiplyByTwo=multiply(2);
-multiplyByTwo(3);
+const Neha= new Student('Neha', 25,75);
+const Navya= new Student('Navya',24,35);
 
-let multiplyByThree=multiply(3);
-multiplyByThree(10);
+Neha.setPlacementAge(18)(40);
+Navya.setPlacementAge(18)(40);
