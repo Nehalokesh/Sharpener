@@ -1,152 +1,220 @@
-console.log('person1: shows ticket');
-console.log('person2: shows ticket');
+// AXIOS GLOBALS
+axios.defaults.headers.common['X-Auth-Token'] =
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c';
 
-const promiseWifeBringingTicks = new Promise((resolve,reject) =>{
-    setTimeout(() => {
-        resolve('ticket');
-    },3000)
-});
+// GET REQUEST
+function getTodos() {
+  // axios({
+  //   method: 'get',
+  //   url: 'https://jsonplaceholder.typicode.com/todos',
+  //   params: {
+  //     _limit: 5
+  //   }
+  // })
+  //   .then(res => showOutput(res))
+  //   .catch(err => console.error(err));
 
-const getPopcorn =promiseWifeBringingTicks.then((t) =>{
-    console.log('wife: i have the ticks');
-    console.log('husband: we should go in');
-    console.log('wife: no i am hungry');
-    return new Promise((resolve, reject) => resolve(`${t}popcorn`));
-});
-
-const getbutter =getPopcorn.then((t) =>{
-    console.log('husband: i got some popcorn');
-    console.log('husband: we should go in');
-    console.log('wife: I need butter on my popcorn');
-    return new Promise((resolve, reject) => resolve(`${t}butter`));
-});
-
-getbutter.then((t)=>console.log(t))
-
-
-console.log('person4: shows ticket');
-console.log('person5: shows ticket');
-
-
-//promise async await
-console.log('person1: shows ticket');
-console.log('person2: shows ticket');
-
-
-
-const preMovie = async()=>{
-    const promisewifebringingticks=new Promise((resolve,reject) =>{
-        setTimeout(()=> resolve('ticket'), 3000);
-    });
-
-    const getpopcorn =new Promise((resolve, reject) => resolve(`popcorn`));
-    const addbutter =new Promise((resolve, reject) => resolve(`butter`));
-    const getColdDrinks =new Promise((resolve, reject) => resolve(`colddrink`));
-    let ticket = await promisewifebringingticks;
-
-    console.log('wife: i have the ticks');
-    console.log('husband: we should go in');
-    console.log('wife: no i am hungry');
-
-    let popcorn = await getpopcorn;
-
-    console.log(`husband: i got some ${popcorn}`);
-    console.log('husband: we should go in');
-    console.log('wife: i need butter on my popcorn');
-
-    let butter = await addbutter;
-
-    console.log(`husband: i got some ${butter} on popcorn`);
-    console.log('husband: anything else darling?');
-    console.log('wife: i need butter on my popcorn');
-    console.log('husband: thank you for the reminder *grins*');
-
-    let colddrink = await getColdDrinks;
-
-    console.log(`husband: i got some ${colddrink} and some ${butter} on popcorn also`);
-    console.log('wife: thank you darling');
-
-
-    return ticket;
-
-}
-
-preMovie().then((m) => console.log(`person3: shows ${m}`));
-
-console.log('person4: shows ticket');
-console.log('person5: shows ticket');
-
-
-
-console.log('person1: shows ticket');
-console.log('person2: shows ticket');
-
-//promise.all
-const preMovie = async()=>{
-    const promisewifebringingticks=new Promise((resolve,reject) =>{
-        setTimeout(()=> resolve('ticket'), 3000);
-    });
-
-    const getpopcorn = new Promise((resolve,reject)=> resolve(`popcorn`));
-    const getcandy = new Promise((resolve,reject)=> resolve(`candy`));    
-    const getcoke = new Promise((resolve,reject)=> resolve(`coke`));
-
-    let ticket = await promisewifebringingticks
-    let [popcorn,candy,coke] = await Promise.all([getpopcorn,getcandy,getcoke])
-    
-    console.log(`${popcorn}, ${candy}, ${coke}`)
-    
-    return ticket;
-
-}
-
-preMovie().then((m) => console.log(`person3: shows ${m}`));
-
-console.log('person4: shows ticket');
-console.log('person5: shows ticket');
-
-//trip
-function buycar(){
-    return new Promise((resolve, reject) => {
-    setTimeout(()=> {
-        resolve('Buy a car')
-    },5000)
-})
-}
-
-function planatrip(){
-    return new Promise((resolve, reject)=> {
-    setTimeout(()=> {
-      resolve('Lets go to Manali')
-    },2000)
-})
-}
-  
-  function reachmanali(){
-    return new Promise((resolve,reject) => {
-        setTimeout(()=> {
-           resolve('Reached Manali') 
-          },1000)
+  axios
+    .get('https://jsonplaceholder.typicode.com/todos?_limit=5', {
+      timeout: 5000
     })
-  }
-  
-  function gotofamousmountain(){
-    return new Promise((resolve,reject) => {
-        setTimeout(()=> {
-            resolve('Reached Montain')
-          },1000)
-        })
-    }
-    
-
-async function fun1(){
-  const msg = await buycar();
-  console.log(msg)
-  const msg2 = await planatrip()
-  console.log(msg2);
-  const msg3 = await reachmanali()
-  console.log(msg3);
-  const msg4 = await gotofamousmountain()
-  console.log(msg4)
+    .then(res => showOutput(res))
+    .catch(err => console.error(err));
 }
-fun1()
+
+// POST REQUEST
+function addTodo() {
+  axios
+    .post('https://jsonplaceholder.typicode.com/todos', {
+      title: 'New Todo',
+      completed: false
+    })
+    .then(res => showOutput(res))
+    .catch(err => console.error(err));
+}
+
+// PUT/PATCH REQUEST
+function updateTodo() {
+  axios
+    .patch('https://jsonplaceholder.typicode.com/todos/1', {
+      title: 'Updated Todo',
+      completed: true
+    })
+    .then(res => showOutput(res))
+    .catch(err => console.error(err));
+}
+
+// DELETE REQUEST
+function removeTodo() {
+  axios
+    .delete('https://jsonplaceholder.typicode.com/todos/1')
+    .then(res => showOutput(res))
+    .catch(err => console.error(err));
+}
+
+// SIMULTANEOUS DATA
+function getData() {
+  axios
+    .all([
+      axios.get('https://jsonplaceholder.typicode.com/todos?_limit=5'),
+      axios.get('https://jsonplaceholder.typicode.com/posts?_limit=5')
+    ])
+    .then(axios.spread((todos, posts) => showOutput(posts)))
+    .catch(err => console.error(err));
+}
+
+// CUSTOM HEADERS
+function customHeaders() {
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: 'sometoken'
+    }
+  };
+
+  axios
+    .post(
+      'https://jsonplaceholder.typicode.com/todos',
+      {
+        title: 'New Todo',
+        completed: false
+      },
+      config
+    )
+    .then(res => showOutput(res))
+    .catch(err => console.error(err));
+}
+
+// TRANSFORMING REQUESTS & RESPONSES
+function transformResponse() {
+  const options = {
+    method: 'post',
+    url: 'https://jsonplaceholder.typicode.com/todos',
+    data: {
+      title: 'Hello World'
+    },
+    transformResponse: axios.defaults.transformResponse.concat(data => {
+      data.title = data.title.toUpperCase();
+      return data;
+    })
+  };
+
+  axios(options).then(res => showOutput(res));
+}
+
+// ERROR HANDLING
+function errorHandling() {
+  axios
+    .get('https://jsonplaceholder.typicode.com/todoss', {
+      // validateStatus: function(status) {
+      //   return status < 500; // Reject only if status is greater or equal to 500
+      // }
+    })
+    .then(res => showOutput(res))
+    .catch(err => {
+      if (err.response) {
+        // Server responded with a status other than 200 range
+        console.log(err.response.data);
+        console.log(err.response.status);
+        console.log(err.response.headers);
+
+        if (err.response.status === 404) {
+          alert('Error: Page Not Found');
+        }
+      } else if (err.request) {
+        // Request was made but no response
+        console.error(err.request);
+      } else {
+        console.error(err.message);
+      }
+    });
+}
+
+// CANCEL TOKEN
+function cancelToken() {
+  const source = axios.CancelToken.source();
+
+  axios
+    .get('https://jsonplaceholder.typicode.com/todos', {
+      cancelToken: source.token
+    })
+    .then(res => showOutput(res))
+    .catch(thrown => {
+      if (axios.isCancel(thrown)) {
+        console.log('Request canceled', thrown.message);
+      }
+    });
+
+  if (true) {
+    source.cancel('Request canceled!');
+  }
+}
+
+// INTERCEPTING REQUESTS & RESPONSES
+axios.interceptors.request.use(
+  config => {
+    console.log(
+      `${config.method.toUpperCase()} request sent to ${
+        config.url
+      } at ${new Date().getTime()}`
+    );
+
+    return config;
+  },
+  error => {
+    return Promise.reject(error);
+  }
+);
+
+// AXIOS INSTANCE
+const axiosInstance = axios.create({
+  // Other custom settings
+  baseURL: 'https://jsonplaceholder.typicode.com'
+});
+// axiosInstance.get('/comments').then(res => showOutput(res));
+
+// Show output in browser
+function showOutput(res) {
+  document.getElementById('res').innerHTML = `
+  <div class="card card-body mb-4">
+    <h5>Status: ${res.status}</h5>
+  </div>
+  <div class="card mt-3">
+    <div class="card-header">
+      Headers
+    </div>
+    <div class="card-body">
+      <pre>${JSON.stringify(res.headers, null, 2)}</pre>
+    </div>
+  </div>
+  <div class="card mt-3">
+    <div class="card-header">
+      Data
+    </div>
+    <div class="card-body">
+      <pre>${JSON.stringify(res.data, null, 2)}</pre>
+    </div>
+  </div>
+  <div class="card mt-3">
+    <div class="card-header">
+      Config
+    </div>
+    <div class="card-body">
+      <pre>${JSON.stringify(res.config, null, 2)}</pre>
+    </div>
+  </div>
+`;
+}
+
+// Event listeners
+document.getElementById('get').addEventListener('click', getTodos);
+document.getElementById('post').addEventListener('click', addTodo);
+document.getElementById('update').addEventListener('click', updateTodo);
+document.getElementById('delete').addEventListener('click', removeTodo);
+document.getElementById('sim').addEventListener('click', getData);
+document.getElementById('headers').addEventListener('click', customHeaders);
+document
+  .getElementById('transform')
+  .addEventListener('click', transformResponse);
+document.getElementById('error').addEventListener('click', errorHandling);
+document.getElementById('cancel').addEventListener('click', cancelToken);
